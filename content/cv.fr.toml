@@ -104,8 +104,8 @@ Kubernetes, ensuite migration vers AWS pour livrer les éditions quotidiennes de
 """
 bullets = [
   "Proposer puis mener la migration de Kubernetes autogéré vers **EKS**, remplacer le CNI **Weave** où logeait l'essentiel de l'instabilité: les incidents liés à Kubernetes sont passés d'environ deux par semaine à aucun.",
-  "Établir le plan de relève de la plateforme: un **RTO de moins d'une heure** pour republier des nouvelles fraîches sur une infrastructure isolée, sans restaurer de sauvegarde, et 24 heures pour l'essentiel des services. Tester le plan chaque trimestre.",
-  "Mettre à jour le parc de **Kubernetes**. La mise à jour **1.14 à 1.18** impliquait la transition etcd2 → etcd3 et cinq à dix minutes sans API. A nécessité préparation et répétition avant le changement.",
+  "Établir le plan de relève de la plateforme: un **RTO de moins d'une heure** pour republier des nouvelles fraîches sur une infrastructure isolée, sans restaurer de sauvegarde, et 12 heures pour l'essentiel des services. Tester le plan chaque trimestre.",
+  "Mettre à jour les différents systèmes critiques dont le parc de **Kubernetes**. La mise à jour K8S de **1.14 à 1.18** impliquait la transition etcd2 → etcd3 et cinq à dix minutes sans API. A nécessité préparation et répétition avant le changement.",
   "Mener une revue des alertes sur toute la plateforme: régler les causes récurrentes. Les appels de nuit ont chuté.",
   "Introduire **ArgoCD** et le GitOps pour les services de plateforme.",
   "Prendre **Prometheus** en charge puis contribuer au passage vers Datadog.",
