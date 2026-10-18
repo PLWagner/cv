@@ -1,0 +1,72 @@
+name: Build and publish the CV
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never let two deploys race; drop the older one.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # The runner image ships Google Chrome; build.py finds it on PATH.
+      - name: Show Chrome version
+        run: google-chrome --version
+
+      - name: Build
+        run: python3 build.py
+
+      - name: Check the output
+        run: |
+          python3 - <<'PY'
+          import pathlib, re, sys
+
+          dist = pathlib.Path("dist")
+          problems = []
+
+          expected = [f"cv.{p.name.split('.')[1]}.pdf"
+                      for p in sorted(pathlib.Path("content").glob("cv.*.toml"))]
+          for name in expected + ["index.html"]:
+              if not (dist / name).exists():
+                  problems.append(f"{name} was not produced")
+
+          for pdf in sorted(dist.glob("cv.*.pdf")):
+              pages = len(re.findall(rb"/Type\s*/Page[^s]", pdf.read_bytes()))
+              print(f"{pdf.name}: {pages} page(s)")
+              if pages > 2:
+                  problems.append(f"{pdf.name} is {pages} pages, expected 2")
+
+          if problems:
+              sys.exit("\n".join(problems))
+          print("ok")
+          PY
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
