@@ -1,0 +1,190 @@
+# ---------------------------------------------------------------------------
+# English CV — targeted at a Site Reliability Engineering role on GCP.
+# Lines marked  ### VERIFY  hold a value that needs confirming.
+#
+# STYLE: plain American English. Short words, no consultant vocabulary.
+# ---------------------------------------------------------------------------
+
+[meta]
+lang   = "en"
+paper  = "letter"
+# Back up to a comfortable reading size now that the content is shorter.
+base_pt = 10.4
+accent = "#0e5a63"
+
+[labels]
+summary    = "Profile"
+highlights = "Impact"
+experience = "Experience"
+skills     = "Skills"
+certifications = "Certifications"
+earlier    = "Earlier"
+education  = "Education"
+closing    = "Also"
+
+[profile]
+name     = "Pierre-Luc Wagner"
+headline = "Infrastructure & Platform Engineer"
+summary  = """
+Infrastructure engineer, ten years on the platform behind La Presse, one of Canada's largest \
+newsrooms. \
+I spent most of that decade on the reliability side: on-call, incident and cost \
+reduction, observability, and cutting the repetitive work that wakes people up at night. I manage the \
+team today, but I am at my best in the technical work: a hands-on SRE role is what I \
+want.
+"""
+
+[[profile.links]]
+value = "Montréal, QC"
+
+[[profile.links]]
+value = "pierreluc.wagner@gmail.com"
+href  = "mailto:pierreluc.wagner@gmail.com"
+
+[[profile.links]]
+value = "+1 514 773-7802"
+
+[[profile.links]]
+value = "linkedin.com/in/plwagner3"
+href  = "https://linkedin.com/in/plwagner3"
+
+[[profile.links]]
+value = "github.com/PLWagner"
+href  = "https://github.com/PLWagner"
+
+# --- impact tiles ----------------------------------------------------------
+
+[[highlights]]
+value = "2 → 0"
+label = "Kubernetes incidents a week, after EKS and the CNI swap"
+
+[[highlights]]
+value = "1,200 VMs"
+label = "on-premise fleet operated, then retired in favour of AWS"
+
+[[highlights]]
+value = "< 1 h"
+label = "to publish fresh news again on isolated infrastructure — DR exercised quarterly"
+
+[[highlights]]
+value = "$630K/yr"
+label = "off the data center bill after the move to AWS — a quarter of the former cost"
+
+# --- experience ------------------------------------------------------------
+
+[[experience]]
+company  = "Nuglif (La Presse)"
+location = "Montréal, QC"
+role     = "Manager, Cloud Infrastructure & Cybersecurity"
+start    = "June 2025"
+end      = "present"
+context  = """
+Own the roadmap, budget and reliability of the platform.
+"""
+bullets = [
+  "Took over the **GCP** environment: inventory, project structure, cost tracking, and a start on Terraform. Tightened permissions and limited access on the billing accounts.",
+  "Put an internal analytics team's AWS account under governance: stopped manual production changes and fixed the security holes.",
+  "Replaced permanent **IAM** users with SSO roles that have a limited session time, and changed the roles to cut down privileges.",
+  "Deployed **Falco** in Kubernetes to detect threats at runtime, and tuned the macros to remove false positives.",
+  "Set up a **CloudFront WAF** in front of the public frontend to limit AI bot traffic, keeping delivery cost in mind.",
+  "Manage 5 people: four engineers and a database administrator.",
+  "Build the yearly cloud and SaaS budget.",
+]
+tech = ["AWS", "GCP", "Terraform", "IAM", "SSO", "CloudFront", "Cost engineering"]
+
+[[experience]]
+company  = "Nuglif (La Presse)"
+location = "Montréal, QC"
+role     = "Systems Administrator (DevOps)"
+start    = "2016"
+end      = "2025"
+context  = """
+Ran about 1,200 VMs on VMware, set up and managed with Chef, then the early days of \
+Kubernetes, then the move to AWS to deliver La Presse's daily editions.
+"""
+bullets = [
+  "Proposed and led the move from self-managed Kubernetes to **EKS**, and replaced the **Weave** CNI where most of the instability came from: Kubernetes incidents went from about two a week to none.",
+  "Set up the platform's disaster recovery plan: an **RTO under an hour** to publish fresh news again on isolated infrastructure, with no backup restored, and 24 hours for the main services. Tested the plan every quarter.",
+  "Upgraded the **Kubernetes** fleet. The **1.14 to 1.18** upgrade meant moving etcd2 to etcd3 and five to ten minutes with no API. It took preparation and a rehearsal before the change.",
+  "Ran an alert review across the platform: fixed the recurring causes. Night calls dropped.",
+  "Brought in **ArgoCD** and GitOps for the platform services.",
+  "Took care of **Prometheus**, then helped move to Datadog.",
+  "Replaced **Fluentd** with **Fluent Bit** for log shipping to **Splunk**: researched the tool, presented it to the team, and led the replacement.",
+  "Was first on call on the 24/7 rotation from the early Kubernetes days.",
+  "Split the **Terraform** code into modules by context.",
+  "Cut the platform's blast radius: NetworkPolicies, security groups, least-privilege **RBAC** per service in Kubernetes and ArgoCD, and patching for published CVEs.",
+  "Migrated the CDN from Cloudflare to **CloudFront**: a large recurring saving.",
+]
+tech = ["Kubernetes", "EKS", "Terraform", "ArgoCD", "Helm", "Prometheus", "Datadog", "AWS", "Chef", "Python"]
+
+# --- toolkit ---------------------------------------------------------------
+
+[[skills]]
+label = "Cloud"
+items = ["AWS (EKS, EC2, VPC, IAM/IRSA, CloudFront, S3, EFS)", "GCP"]
+
+[[skills]]
+label = "Containers"
+items = ["Kubernetes", "Helm", "ArgoCD", "Cilium"]
+
+[[skills]]
+label = "Infra as code"
+items = ["Terraform", "Chef", "Puppet"]
+
+[[skills]]
+label = "Observability"
+items = ["Fluent Bit", "Splunk", "Prometheus", "Datadog"]
+
+[[skills]]
+label = "Security"
+items = ["IAM & SSO", "least privilege", "Kubernetes & ArgoCD RBAC", "NetworkPolicies", "Falco", "CVE patching"]
+
+[[skills]]
+label = "Reliability"
+items = ["24/7 on-call", "incident response", "alert design", "disaster recovery", "capacity & cost", "postmortems"]
+
+[[skills]]
+label = "Code & systems"
+items = ["Python", "Bash", "SQL", "Linux (Debian, Ubuntu, Arch)", "nginx", "VMware", "Active Directory"]
+
+# --- certifications --------------------------------------------------------
+
+[[certifications]]
+title = "AWS Certified SysOps Administrator – Associate (SOA-C02)"
+when  = "2026 – 2029"
+
+[[certifications]]
+title = "Professional Scrum Product Owner I (PSPO I)"
+when  = "2025"
+
+[[certifications]]
+title = "Certified Kubernetes Administrator (CKA) — Linux Foundation"
+when  = "2021 – 2024"
+
+[[certifications]]
+title = "Certified Kubernetes Security Specialist (CKS) — Linux Foundation"
+when  = "2022 – 2024"
+
+
+# --- earlier ---------------------------------------------------------------
+
+[[earlier]]
+title  = "DevOps — Asset Science LLC · Developer — Synchromedia, ÉTS"
+when   = "2014 – 2016"
+
+# --- education -------------------------------------------------------------
+
+[[education]]
+title = "B.Eng., Information Technology Engineering — ÉTS, Université du Québec"
+when  = "2017"
+
+[[education]]
+title = "B.Eng., Construction Engineering — ÉTS, Université du Québec"
+when  = "2011"
+
+# --- closing ---------------------------------------------------------------
+
+[closing]
+[[closing.groups]]
+label = "Languages"
+value = "French (native) · English (professional) · bassist in the band Dutch Nuggets since 2008"

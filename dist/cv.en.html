@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pierre-Luc Wagner — Infrastructure &amp; Platform Engineer</title>
+<style>
+@page { size: 8.5in 11in; margin: 14mm 15mm; }
+/* ==========================================================================
+   CV — a left rail of section labels against a single column of content.
+   Light only, on purpose: this is a sheet of paper that happens to render
+   in a browser. Everything is tuned for the printed page first.
+   ========================================================================== */
+
+:root {
+  --ink:    #16191c;
+  --muted:  #58626c;
+  --faint:  #8a949d;
+  --rule:   #e3e7ea;
+  --chip:   #f3f5f6;
+  --paper:  #ffffff;
+
+  --sans: "Avenir Next", "Segoe UI", system-ui, -apple-system,
+          "Helvetica Neue", Arial, sans-serif;
+  --mono: "SF Mono", "Menlo", "Consolas", "DejaVu Sans Mono", monospace;
+
+  --rail: 80px;
+  --gap:  15px;
+
+  /* Base body size. build.py overrides it from [meta].base_pt so a language
+     that simply runs longer (French is ~10% longer than English for the same
+     content) can hold two pages without having its content cut. */
+  --base: 10pt;
+}
+
+* { box-sizing: border-box; }
+
+html { background: #e8eaec; }
+
+body {
+  margin: 0;
+  background: #e8eaec;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: var(--base);
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.sheet {
+  max-width: 7.4in;
+  margin: 28px auto;
+  padding: 40px 44px 48px;
+  background: var(--paper);
+  box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 12px 40px rgba(0,0,0,.10);
+}
+
+a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--rule); }
+
+code {
+  font-family: var(--mono);
+  font-size: .88em;
+  letter-spacing: -.01em;
+}
+
+b { font-weight: 600; color: var(--ink); }
+
+.dot {
+  color: var(--faint);
+  font-weight: 400;
+  margin: 0 .5em;
+}
+
+/* --- masthead ----------------------------------------------------------- */
+
+.masthead { margin-bottom: 4px; }
+
+.masthead h1 {
+  margin: 0;
+  font-size: 24pt;
+  font-weight: 600;
+  letter-spacing: -.025em;
+  line-height: 1.02;
+}
+
+.headline {
+  margin: 7px 0 0;
+  font-size: 11pt;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: -.005em;
+}
+
+.contact {
+  margin: 10px 0 0;
+  font-family: var(--mono);
+  font-size: 7.8pt;
+  color: var(--muted);
+  letter-spacing: -.01em;
+}
+
+.contact a { border-bottom-color: #d6dbdf; }
+
+/* The items carry no whitespace between them, so an inline run offers nowhere
+   to break and a long handle overflows the sheet. Flex wrapping supplies the
+   break opportunities; nowrap then keeps each item whole across them. */
+.contact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+.contact a, .contact > span { white-space: nowrap; }
+
+/* --- the rail + body grid ---------------------------------------------- */
+
+/* Deliberately floats, not grid: Chrome will not fragment a grid container
+   across a page break, so a long section would blow out to an extra page.
+   A float paginates correctly and drops the rail label only on the first page
+   of a section that continues — which is what we want anyway. */
+.row {
+  padding-top: 10px;
+  margin-top: 10px;
+  border-top: 1px solid var(--rule);
+}
+
+.row::after { content: ""; display: block; clear: both; }
+
+.rail {
+  float: left;
+  width: var(--rail);
+}
+
+.body { margin-left: calc(var(--rail) + var(--gap)); }
+
+.row:first-of-type { border-top: 2px solid var(--ink); }
+
+.rail h2 {
+  margin: 2px 0 0;
+  font-family: var(--mono);
+  font-size: 7.5pt;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: .11em;
+  color: var(--faint);
+}
+
+/* A one-word label like CERTIFICATIONS has no break opportunity and would
+   overrun the gutter into the body column. Set it smaller instead. */
+.rail h2.long {
+  font-size: 6.7pt;
+  letter-spacing: .02em;
+}
+
+/* --- summary ------------------------------------------------------------ */
+
+.lede {
+  margin: 0;
+  font-size: 10pt;
+  line-height: 1.5;
+  color: #2b3238;
+}
+
+/* --- impact tiles ------------------------------------------------------- */
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 13px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tiles li { border-left: 2px solid var(--accent); padding-left: 9px; min-width: 0; }
+
+.figure {
+  display: block;
+  font-size: 14pt;
+  font-weight: 600;
+  letter-spacing: -.03em;
+  line-height: 1.1;
+}
+
+.caption {
+  display: block;
+  margin-top: 3px;
+  font-size: 7.8pt;
+  line-height: 1.3;
+  color: var(--muted);
+}
+
+/* --- experience --------------------------------------------------------- */
+
+.job + .job { margin-top: 12px; }
+
+.employer { margin-bottom: 7px; }
+
+.employer h3 {
+  margin: 0;
+  font-size: 12pt;
+  font-weight: 600;
+  letter-spacing: -.015em;
+}
+
+.employer-meta {
+  margin: 2px 0 0;
+  font-family: var(--mono);
+  font-size: 8pt;
+  color: var(--muted);
+}
+
+.employer ~ .role { border-left: 2px solid var(--rule); padding-left: 13px; }
+
+.role + .role { margin-top: 11px; }
+
+.role-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.role-head h4 {
+  margin: 0;
+  font-size: 10.5pt;
+  font-weight: 600;
+  letter-spacing: -.005em;
+}
+
+.when {
+  margin: 0;
+  flex: none;
+  font-family: var(--mono);
+  font-size: 8pt;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.role-meta {
+  margin: 1px 0 0;
+  font-family: var(--mono);
+  font-size: 8pt;
+  color: var(--muted);
+}
+
+.context {
+  margin: 4px 0 0;
+  font-size: 9pt;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.achievements {
+  margin: 5px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.achievements li {
+  position: relative;
+  padding-left: 14px;
+  margin-top: 3px;
+  line-height: 1.43;
+}
+
+.achievements li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .62em;
+  width: 6px;
+  height: 1.5px;
+  background: var(--accent);
+}
+
+.tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tech li {
+  font-family: var(--mono);
+  font-size: 7.5pt;
+  letter-spacing: -.01em;
+  color: var(--muted);
+  background: var(--chip);
+  border-radius: 2px;
+  padding: 2px 5px;
+}
+
+/* --- skills / closing --------------------------------------------------- */
+
+.skill-grid { margin: 0; }
+
+.skill {
+  display: grid;
+  grid-template-columns: 94px 1fr;
+  gap: 10px;
+  break-inside: avoid;
+}
+
+.skill + .skill { margin-top: 4px; }
+
+.skill dt {
+  font-family: var(--mono);
+  font-size: 7.8pt;
+  color: var(--accent);
+  letter-spacing: -.02em;
+  padding-top: 1px;
+  hyphens: none;
+}
+
+.skill dd { margin: 0; line-height: 1.44; }
+
+/* --- flat listings (earlier roles, education) --------------------------- */
+
+.line {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 14px;
+  break-inside: avoid;
+}
+
+.line + .line { margin-top: 5px; }
+
+.line-main h4 {
+  margin: 0;
+  font-size: 10pt;
+  font-weight: 600;
+}
+
+.line-main .sub {
+  margin: 1px 0 0;
+  font-family: var(--mono);
+  font-size: 8pt;
+  color: var(--muted);
+}
+
+.line-main .detail {
+  margin: 2px 0 0;
+  font-size: 9.5pt;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* --- narrow screens ----------------------------------------------------- */
+/* Screen only. Print always gets the full page width, so none of this applies
+   to the PDF. */
+
+@media screen and (max-width: 680px) {
+  .sheet {
+    margin: 0;
+    padding: 26px 20px 30px;
+    box-shadow: none;
+  }
+  .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media screen and (max-width: 560px) {
+  /* Drop the rail above its section instead of squeezing the body column. */
+  .rail { float: none; width: auto; margin-bottom: 5px; }
+  .body { margin-left: 0; }
+  .skill { grid-template-columns: 1fr; gap: 0; }
+  .skill dd { margin-bottom: 2px; }
+  .role-head, .line { flex-wrap: wrap; }
+}
+
+/* --- print -------------------------------------------------------------- */
+
+@media print {
+  html, body { background: #fff; }
+
+  .sheet {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  a { border-bottom: none; }
+
+  /* Let a long role flow across the page break, but never orphan a heading
+     from the lines it introduces, and never leave a single line stranded. */
+  .row { break-inside: auto; }
+  .rail { break-inside: avoid; }
+  .masthead, .summary, .highlights { break-inside: avoid; }
+
+  .employer, .role-head, .employer h3, .context { break-after: avoid; }
+  .role-head, .line, .skill { break-inside: avoid; }
+  .achievements li { break-inside: avoid; }
+  .tech { break-before: avoid; }
+
+  p, li { orphans: 2; widows: 2; }
+}
+
+/* Per-document overrides last, so they win over the stylesheet's defaults. */
+:root { --accent: #0e5a63; --base: 10.4pt; }
+</style>
+</head>
+<body>
+<main class="sheet">
+
+  <header class="masthead">
+    <h1>Pierre-Luc Wagner</h1>
+    <p class="headline">Infrastructure &amp; Platform Engineer</p>
+    <p class="contact"><span>Montréal, QC</span><span class="dot" aria-hidden="true">/</span><a href="mailto:pierreluc.wagner@gmail.com">pierreluc.wagner@gmail.com</a><span class="dot" aria-hidden="true">/</span><span>+1 514 773-7802</span><span class="dot" aria-hidden="true">/</span><a href="https://linkedin.com/in/plwagner3">linkedin.com/in/plwagner3</a><span class="dot" aria-hidden="true">/</span><a href="https://github.com/PLWagner">github.com/PLWagner</a></p>
+  </header>
+
+  <section class="row summary">
+    <div class="rail"><h2>Profile</h2></div>
+    <div class="body"><p class="lede">Infrastructure engineer, ten years on the platform behind La Presse, one of Canada's largest newsrooms. I spent most of that decade on the reliability side: on-call, incident and cost reduction, observability, and cutting the repetitive work that wakes people up at night. I manage the team today, but I am at my best in the technical work: a hands-on SRE role is what I want.</p></div>
+  </section>
+
+  <section class="row highlights">
+    <div class="rail"><h2>Impact</h2></div>
+    <div class="body"><ul class="tiles"><li><span class="figure">2 → 0</span><span class="caption">Kubernetes incidents a week, after EKS and the CNI swap</span></li><li><span class="figure">1,200 VMs</span><span class="caption">on-premise fleet operated, then retired in favour of AWS</span></li><li><span class="figure">&lt; 1 h</span><span class="caption">to publish fresh news again on isolated infrastructure — DR exercised quarterly</span></li><li><span class="figure">$630K/yr</span><span class="caption">off the data center bill after the move to AWS — a quarter of the former cost</span></li></ul></div>
+  </section>
+
+  <section class="row experience">
+    <div class="rail"><h2>Experience</h2></div>
+    <div class="body"><div class="job"><div class="employer"><h3>Nuglif (La Presse)</h3><p class="employer-meta">Montréal, QC<span class="dot" aria-hidden="true">/</span>2016 – present</p></div>
+        <article class="role">
+          <div class="role-head">
+            <h4>Manager, Cloud Infrastructure &amp; Cybersecurity</h4>
+            <p class="when">June 2025 – present</p>
+          </div>
+          
+          <p class="context">Own the roadmap, budget and reliability of the platform.
+</p>
+          <ul class="achievements"><li>Took over the <b>GCP</b> environment: inventory, project structure, cost tracking, and a start on Terraform. Tightened permissions and limited access on the billing accounts.</li><li>Put an internal analytics team's AWS account under governance: stopped manual production changes and fixed the security holes.</li><li>Replaced permanent <b>IAM</b> users with SSO roles that have a limited session time, and changed the roles to cut down privileges.</li><li>Deployed <b>Falco</b> in Kubernetes to detect threats at runtime, and tuned the macros to remove false positives.</li><li>Set up a <b>CloudFront WAF</b> in front of the public frontend to limit AI bot traffic, keeping delivery cost in mind.</li><li>Manage 5 people: four engineers and a database administrator.</li><li>Build the yearly cloud and SaaS budget.</li></ul>
+          <ul class="tech"><li>AWS</li><li>GCP</li><li>Terraform</li><li>IAM</li><li>SSO</li><li>CloudFront</li><li>Cost engineering</li></ul>
+        </article>
+
+        <article class="role">
+          <div class="role-head">
+            <h4>Systems Administrator (DevOps)</h4>
+            <p class="when">2016 – 2025</p>
+          </div>
+          
+          <p class="context">Ran about 1,200 VMs on VMware, set up and managed with Chef, then the early days of Kubernetes, then the move to AWS to deliver La Presse's daily editions.
+</p>
+          <ul class="achievements"><li>Proposed and led the move from self-managed Kubernetes to <b>EKS</b>, and replaced the <b>Weave</b> CNI where most of the instability came from: Kubernetes incidents went from about two a week to none.</li><li>Set up the platform's disaster recovery plan: an <b>RTO under an hour</b> to publish fresh news again on isolated infrastructure, with no backup restored, and 24 hours for the main services. Tested the plan every quarter.</li><li>Upgraded the <b>Kubernetes</b> fleet. The <b>1.14 to 1.18</b> upgrade meant moving etcd2 to etcd3 and five to ten minutes with no API. It took preparation and a rehearsal before the change.</li><li>Ran an alert review across the platform: fixed the recurring causes. Night calls dropped.</li><li>Brought in <b>ArgoCD</b> and GitOps for the platform services.</li><li>Took care of <b>Prometheus</b>, then helped move to Datadog.</li><li>Replaced <b>Fluentd</b> with <b>Fluent Bit</b> for log shipping to <b>Splunk</b>: researched the tool, presented it to the team, and led the replacement.</li><li>Was first on call on the 24/7 rotation from the early Kubernetes days.</li><li>Split the <b>Terraform</b> code into modules by context.</li><li>Cut the platform's blast radius: NetworkPolicies, security groups, least-privilege <b>RBAC</b> per service in Kubernetes and ArgoCD, and patching for published CVEs.</li><li>Migrated the CDN from Cloudflare to <b>CloudFront</b>: a large recurring saving.</li></ul>
+          <ul class="tech"><li>Kubernetes</li><li>EKS</li><li>Terraform</li><li>ArgoCD</li><li>Helm</li><li>Prometheus</li><li>Datadog</li><li>AWS</li><li>Chef</li><li>Python</li></ul>
+        </article>
+</div></div>
+  </section>
+
+  <section class="row skills">
+    <div class="rail"><h2>Skills</h2></div>
+    <div class="body"><dl class="skill-grid"><div class="skill"><dt>Cloud</dt><dd>AWS (EKS, EC2, VPC, IAM/IRSA, CloudFront, S3, EFS) · GCP</dd></div><div class="skill"><dt>Containers</dt><dd>Kubernetes · Helm · ArgoCD · Cilium</dd></div><div class="skill"><dt>Infra as code</dt><dd>Terraform · Chef · Puppet</dd></div><div class="skill"><dt>Observability</dt><dd>Fluent Bit · Splunk · Prometheus · Datadog</dd></div><div class="skill"><dt>Security</dt><dd>IAM &amp; SSO · least privilege · Kubernetes &amp; ArgoCD RBAC · NetworkPolicies · Falco · CVE patching</dd></div><div class="skill"><dt>Reliability</dt><dd>24/7 on-call · incident response · alert design · disaster recovery · capacity &amp; cost · postmortems</dd></div><div class="skill"><dt>Code &amp; systems</dt><dd>Python · Bash · SQL · Linux (Debian, Ubuntu, Arch) · nginx · VMware · Active Directory</dd></div></dl></div>
+  </section>
+
+  <section class="row certifications">
+    <div class="rail"><h2 class="long">Certifications</h2></div>
+    <div class="body">
+        <div class="line">
+          <div class="line-main">
+            <h4>AWS Certified SysOps Administrator – Associate (SOA-C02)</h4>
+            
+            
+          </div>
+          <p class="when">2026 – 2029</p>
+        </div>
+        <div class="line">
+          <div class="line-main">
+            <h4>Professional Scrum Product Owner I (PSPO I)</h4>
+            
+            
+          </div>
+          <p class="when">2025</p>
+        </div>
+        <div class="line">
+          <div class="line-main">
+            <h4>Certified Kubernetes Administrator (CKA) — Linux Foundation</h4>
+            
+            
+          </div>
+          <p class="when">2021 – 2024</p>
+        </div>
+        <div class="line">
+          <div class="line-main">
+            <h4>Certified Kubernetes Security Specialist (CKS) — Linux Foundation</h4>
+            
+            
+          </div>
+          <p class="when">2022 – 2024</p>
+        </div></div>
+  </section>
+
+  <section class="row earlier">
+    <div class="rail"><h2>Earlier</h2></div>
+    <div class="body">
+        <div class="line">
+          <div class="line-main">
+            <h4>DevOps — Asset Science LLC · Developer — Synchromedia, ÉTS</h4>
+            
+            
+          </div>
+          <p class="when">2014 – 2016</p>
+        </div></div>
+  </section>
+
+  <section class="row education">
+    <div class="rail"><h2>Education</h2></div>
+    <div class="body">
+        <div class="line">
+          <div class="line-main">
+            <h4>B.Eng., Information Technology Engineering — ÉTS, Université du Québec</h4>
+            
+            
+          </div>
+          <p class="when">2017</p>
+        </div>
+        <div class="line">
+          <div class="line-main">
+            <h4>B.Eng., Construction Engineering — ÉTS, Université du Québec</h4>
+            
+            
+          </div>
+          <p class="when">2011</p>
+        </div></div>
+  </section>
+
+  <section class="row closing">
+    <div class="rail"><h2>Also</h2></div>
+    <div class="body"><dl class="skill-grid"><div class="skill"><dt>Languages</dt><dd>French (native) · English (professional) · bassist in the band Dutch Nuggets since 2008</dd></div></dl></div>
+  </section>
+
+</main>
+</body>
+</html>

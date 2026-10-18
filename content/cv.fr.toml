@@ -1,0 +1,189 @@
+# ---------------------------------------------------------------------------
+# CV français. Adaptation de cv.en.toml — pas une traduction littérale.
+# Les lignes marquées  ### VÉRIFIER  contiennent une valeur à confirmer.
+#
+# TYPOGRAPHIE : pas d'espace avant les deux-points, pas de virgule avant « et »
+# dans une énumération. Choix délibéré, à ne pas « corriger ».
+# ---------------------------------------------------------------------------
+
+[meta]
+lang   = "fr"
+paper  = "letter"
+# Le français reste un cran sous l'anglais : il est plus long à contenu égal.
+base_pt = 10.0
+accent = "#0e5a63"
+
+[labels]
+summary    = "Profil"
+highlights = "Impact"
+experience = "Expérience"
+skills     = "Compétences"
+certifications = "Certifications"
+earlier    = "Avant"
+education  = "Formation"
+closing    = "Aussi"
+
+[profile]
+name     = "Pierre-Luc Wagner"
+headline = "Ingénieur infrastructure et plateforme"
+summary  = """
+Ingénieur en infrastructure, dix ans sur la plateforme de La Presse. J'ai \
+passé l'essentiel de cette décennie du côté de la fiabilité: garde 24/7, réduction des incidents \
+et des coûts, observabilité et élimination du travail répétitif qui réveille les gens la nuit. Je gère \
+l'équipe aujourd'hui. C'est dans le travail technique que je donne ma pleine mesure, et c'est \
+là que je veux me dépasser: un rôle SRE, les mains dans l'action.
+"""
+
+[[profile.links]]
+value = "Montréal, QC"
+
+[[profile.links]]
+value = "pierreluc.wagner@gmail.com"
+href  = "mailto:pierreluc.wagner@gmail.com"
+
+[[profile.links]]
+value = "+1 514 773-7802"
+
+[[profile.links]]
+value = "linkedin.com/in/plwagner3"
+href  = "https://linkedin.com/in/plwagner3"
+
+[[profile.links]]
+value = "github.com/PLWagner"
+href  = "https://github.com/PLWagner"
+
+# --- tuiles d'impact -------------------------------------------------------
+
+[[highlights]]
+value = "2 → 0"
+label = "incidents Kubernetes par semaine, après EKS et le changement de CNI"
+
+[[highlights]]
+value = "1 200 VM"
+label = "de parc sur site exploité, puis retiré au profit d'AWS"
+
+[[highlights]]
+value = "< 1 h"
+label = "pour republier des nouvelles fraîches sur une infra isolée — relève testée chaque trimestre"
+
+[[highlights]]
+value = "630 k$/an"
+label = "retirés de la facture du centre de données après le passage à AWS, soit quatre fois moins cher"
+
+# --- expérience ------------------------------------------------------------
+
+[[experience]]
+company  = "Nuglif (La Presse)"
+location = "Montréal, QC"
+role     = "Superviseur, infrastructure Cloud et cybersécurité"
+start    = "juin 2025"
+end      = "aujourd'hui"
+context  = """
+Responsable de la feuille de route, du budget et de la fiabilité de la plateforme.
+"""
+bullets = [
+  "Prendre en main le parc **GCP**: inventaire, structure des projets, suivi des coûts, commencer IaC avec Terraform. Resserrer fortement les droits, limiter les accès sur les comptes de facturation.",
+  "Mettre le compte AWS d'une équipe d'analytique interne sous gouvernance: arrêter les changements manuels en production et corriger les vulnérabilités de sécurité.",
+  "Remplacer les utilisateurs **IAM** permanents par des rôles SSO à durée de session limitée et modifier les rôles pour diminuer les privilèges.",
+  "Déployer **Falco** dans Kubernetes pour détecter les menaces à l'exécution et ajuster les macros pour éliminer les faux positifs.",
+  "Configurer un **WAF CloudFront** devant le frontend public pour limiter le trafic des robots d'IA, en tenant compte du coût de diffusion.",
+  "Superviser 5 employés: quatre ingénieurs et un administrateur de base de données.",
+  "Faire le budget annuel cloud et SaaS.",
+]
+tech = ["AWS", "GCP", "Terraform", "IAM", "SSO", "CloudFront", "Coûts cloud"]
+
+[[experience]]
+company  = "Nuglif (La Presse)"
+location = "Montréal, QC"
+role     = "Administrateur système (DevOps)"
+start    = "2016"
+end      = "2025"
+context  = """
+Administrer un parc d'environ 1 200 VM sous VMware, configurées et gérées par Chef, puis les débuts de \
+Kubernetes, ensuite migration vers AWS pour livrer les éditions quotidiennes de La Presse.
+"""
+bullets = [
+  "Proposer puis mener la migration de Kubernetes autogéré vers **EKS**, remplacer le CNI **Weave** où logeait l'essentiel de l'instabilité: les incidents liés à Kubernetes sont passés d'environ deux par semaine à aucun.",
+  "Établir le plan de relève de la plateforme: un **RTO de moins d'une heure** pour republier des nouvelles fraîches sur une infrastructure isolée, sans restaurer de sauvegarde, et 24 heures pour l'essentiel des services. Tester le plan chaque trimestre.",
+  "Mettre à jour le parc de **Kubernetes**. La mise à jour **1.14 à 1.18** impliquait la transition etcd2 → etcd3 et cinq à dix minutes sans API. A nécessité préparation et répétition avant le changement.",
+  "Mener une revue des alertes sur toute la plateforme: régler les causes récurrentes. Les appels de nuit ont chuté.",
+  "Introduire **ArgoCD** et le GitOps pour les services de plateforme.",
+  "Prendre **Prometheus** en charge puis contribuer au passage vers Datadog.",
+  "Remplacer **Fluentd** par **Fluent Bit** pour l'envoi des journaux vers **Splunk**: étudier l'outil, le présenter à l'équipe et mener le remplacement.",
+  "Assurer la première ligne de la garde 24/7 dès les débuts de Kubernetes.",
+  "Découper le code **Terraform** en modules par contexte.",
+  "Limiter la portée d'une compromission: NetworkPolicies, security groups, RBAC avec moindre privilège par service dans Kubernetes et ArgoCD, correctifs pour les CVE publiées.",
+  "Migrer le CDN de Cloudflare vers **CloudFront**: économie récurrente importante.",
+]
+tech = ["Kubernetes", "EKS", "Terraform", "ArgoCD", "Helm", "Prometheus", "Datadog", "AWS", "Chef", "Python"]
+
+# --- outils ----------------------------------------------------------------
+
+[[skills]]
+label = "Cloud"
+items = ["AWS (EKS, EC2, VPC, IAM/IRSA, CloudFront, S3, EFS)", "GCP"]
+
+[[skills]]
+label = "Conteneurs"
+items = ["Kubernetes", "Helm", "ArgoCD", "Cilium"]
+
+[[skills]]
+label = "Infra as code"
+items = ["Terraform", "Chef", "Puppet"]
+
+[[skills]]
+label = "Observabilité"
+items = ["Fluent Bit", "Splunk", "Prometheus", "Datadog"]
+
+[[skills]]
+label = "Sécurité"
+items = ["IAM et SSO", "moindre privilège", "RBAC Kubernetes et ArgoCD", "NetworkPolicies", "Falco", "correctifs de CVE"]
+
+[[skills]]
+label = "Fiabilité"
+items = ["garde 24/7", "réponse aux incidents", "conception des alertes", "plan de relève", "capacité et coûts", "post-mortems"]
+
+[[skills]]
+label = "Code et systèmes"
+items = ["Python", "Bash", "SQL", "Linux (Debian, Ubuntu, Arch)", "nginx", "VMware", "Active Directory"]
+
+# --- certifications --------------------------------------------------------
+
+[[certifications]]
+title = "AWS Certified SysOps Administrator – Associate (SOA-C02)"
+when  = "2026 – 2029"
+
+[[certifications]]
+title = "Professional Scrum Product Owner I (PSPO I)"
+when  = "2025"
+
+[[certifications]]
+title = "Certified Kubernetes Administrator (CKA) — Linux Foundation"
+when  = "2021 – 2024"
+
+[[certifications]]
+title = "Certified Kubernetes Security Specialist (CKS) — Linux Foundation"
+when  = "2022 – 2024"
+
+# --- avant -----------------------------------------------------------------
+
+[[earlier]]
+title  = "DevOps — Asset Science LLC · Développeur — Synchromedia, ÉTS"
+when   = "2014 – 2016"
+
+# --- formation -------------------------------------------------------------
+
+[[education]]
+title = "Baccalauréat en génie des technologies de l'information — ÉTS, Université du Québec"
+when  = "2017"
+
+[[education]]
+title = "Baccalauréat en génie de la construction — ÉTS, Université du Québec"
+when  = "2011"
+
+# --- aussi -----------------------------------------------------------------
+
+[closing]
+[[closing.groups]]
+label = "Langues"
+value = "Français (langue maternelle) · Anglais (professionnel) · bassiste du groupe Dutch Nuggets depuis 2008"
