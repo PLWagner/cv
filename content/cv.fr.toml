@@ -129,7 +129,7 @@ items = ["Kubernetes", "Helm", "ArgoCD", "Cilium"]
 
 [[skills]]
 label = "Infra as code"
-items = ["Terraform", "Chef", "Puppet"]
+items = ["Terraform", "Chef"]
 
 [[skills]]
 label = "Observabilité"

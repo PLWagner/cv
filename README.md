@@ -1,7 +1,7 @@
 # CV — Pierre-Luc Wagner
 
 CV bilingue (EN / FR) généré à partir d'un fichier de données unique par langue.
-Pas de dépendance à installer : Python 3.11+ (stdlib seulement) et Google Chrome.
+Pas de dépendance à installer: Python 3.11+ (stdlib seulement) et Google Chrome.
 
 ## Utilisation
 
@@ -23,8 +23,8 @@ déployer si un CV dépasse deux pages ou si un fichier attendu manque.
 `dist/index.html` est une page d'accueil générée automatiquement : choix de la
 langue, lecture en ligne ou PDF.
 
-> ⚠️ **Avant une première publication**, lance `scripts/prepare-public.sh`.
-> Il sépare le matériel privé et repart d'un historique neuf.
+> **Avant une première publication**: `scripts/prepare-public.sh`.
+> Sépare le matériel privé et repart d'un historique neuf.
 
 ## Structure
 
@@ -37,12 +37,9 @@ langue, lecture en ligne ou PDF.
 | `dist/`                | Sorties — `index.html`, `cv.en.*`, `cv.fr.*` |
 | `.github/workflows/`   | Construction et déploiement sur GitHub Pages |
 
-Le HTML produit est **autonome** : le CSS est intégré au fichier. Tu peux
-l'envoyer par courriel ou l'héberger tel quel.
-
 ## Ajouter une expérience
 
-Ajoute un bloc `[[experience]]` dans le fichier de la langue voulue :
+Ajouter un bloc `[[experience]]` dans le fichier de la langue voulue:
 
 ```toml
 [[experience]]
@@ -65,14 +62,14 @@ progression de titres chez le même employeur).
 
 Dans les `bullets` et les `context`, `**gras**` et `` `mono` `` fonctionnent.
 
-## Longueur : tenir sur deux pages
+## Longueur: tenir sur deux pages
 
 `make` affiche le nombre de pages et avertit au-delà de deux. Si une langue
 déborde, `base_pt` dans `[meta]` ajuste la taille de base du texte pour cette
-langue seulement — le français tourne à `9.7` parce qu'il est ~10 % plus long
+langue seulement. Le français tourne à `9.7` parce qu'il est ~10 % plus long
 que l'anglais à contenu égal. Ajuste ce nombre avant de couper du contenu.
 
 ## Format de papier
 
 `letter` par défaut (Amérique du Nord). Pour l'Europe, change `paper` dans
-la section `[meta]` du fichier de contenu, ou lance `make PAPER=a4`.
+la section `[meta]` du fichier de contenu ou lancer `make PAPER=a4`.
