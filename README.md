@@ -1,75 +1,82 @@
 # CV — Pierre-Luc Wagner
 
-CV bilingue (EN / FR) généré à partir d'un fichier de données unique par langue.
-Pas de dépendance à installer: Python 3.11+ (stdlib seulement) et Google Chrome.
+A bilingual CV (EN / FR) built from one data file per language, versioned in
+Git and published to GitHub Pages.
 
-## Utilisation
+Nothing to install: Python 3.11+ (standard library only) and Google Chrome.
+
+**Live:** https://plwagner.github.io/cv/
+
+## Usage
 
 ```bash
-make            # construit HTML + PDF pour les deux langues dans dist/
-make en         # anglais seulement
-make fr         # français seulement
-make html       # HTML seulement (rapide, pas de PDF)
-make open       # construit et ouvre les PDF
+make            # build HTML + PDF for every language into dist/
+make en         # English only
+make fr         # French only
+make html       # HTML only, skip the PDF step
+make open       # build, then open both PDFs
 make clean
 ```
 
-## Publication
+`make` prints the page count and warns when a CV goes over two pages.
 
-Le site est construit et déployé sur GitHub Pages par
-`.github/workflows/pages.yml` à chaque push sur `main`. Le workflow refuse de
-déployer si un CV dépasse deux pages ou si un fichier attendu manque.
+## Layout
 
-`dist/index.html` est une page d'accueil générée automatiquement : choix de la
-langue, lecture en ligne ou PDF.
+| Path                   | What it is |
+|------------------------|------------|
+| `content/cv.en.toml`   | English content |
+| `content/cv.fr.toml`   | French content |
+| `template/cv.css`      | All the styling, screen and print |
+| `build.py`             | Reads the TOML, renders the HTML, prints the PDF |
+| `dist/`                | Output — `index.html`, `cv.en.*`, `cv.fr.*` |
+| `.github/workflows/`   | Build and deploy to GitHub Pages |
 
-> **Avant une première publication**: `scripts/prepare-public.sh`.
-> Sépare le matériel privé et repart d'un historique neuf.
+The HTML is self-contained: the CSS is inlined. Email it or host it as is.
 
-## Structure
+## Making it yours
 
-| Chemin                 | Rôle |
-|------------------------|------|
-| `content/cv.en.toml`   | Contenu de la version anglaise |
-| `content/cv.fr.toml`   | Contenu de la version française |
-| `template/cv.css`      | Toute la mise en forme (écran + impression) |
-| `build.py`             | Lit le TOML, rend le HTML, imprime le PDF via Chrome headless |
-| `dist/`                | Sorties — `index.html`, `cv.en.*`, `cv.fr.*` |
-| `.github/workflows/`   | Construction et déploiement sur GitHub Pages |
+Fork it, then replace the two files in `content/`. Nothing else is
+person-specific.
 
-## Ajouter une expérience
-
-Ajouter un bloc `[[experience]]` dans le fichier de la langue voulue:
+An entry looks like this:
 
 ```toml
 [[experience]]
-company  = "Nom de l'employeur"
-role     = "Titre du poste"
-location = "Montréal, QC"
+company  = "Employer"
+role     = "Job title"
+location = "City, Region"
 start    = "2026"
-end      = "présent"
-context  = "Une ligne pour situer le contexte et l'échelle."
+end      = "present"
+context  = "One line to set the scene and the scale."
 bullets  = [
-  "Réalisation avec un **chiffre** dedans.",
-  "Autre réalisation, avec du `terraform` en mono.",
+  "Something you did, with a **number** in it.",
+  "Something else, with `terraform` set in mono.",
 ]
 tech = ["GCP", "Kubernetes", "Terraform"]
 ```
 
-Les entrées consécutives qui partagent le même `company` sont regroupées
-automatiquement sous un seul en-tête d'employeur (utile pour montrer une
-progression de titres chez le même employeur).
+Consecutive entries sharing a `company` are grouped under a single employer
+heading, which is how you show a progression of titles at one place.
 
-Dans les `bullets` et les `context`, `**gras**` et `` `mono` `` fonctionnent.
+`**bold**` and `` `mono` `` work in `bullets` and `context`.
 
-## Longueur: tenir sur deux pages
+Drop a language by deleting its file in `content/`; add one by copying an
+existing file and translating it. `build.py` picks up whatever is there.
 
-`make` affiche le nombre de pages et avertit au-delà de deux. Si une langue
-déborde, `base_pt` dans `[meta]` ajuste la taille de base du texte pour cette
-langue seulement. Le français tourne à `9.7` parce qu'il est ~10 % plus long
-que l'anglais à contenu égal. Ajuste ce nombre avant de couper du contenu.
+## Holding two pages
 
-## Format de papier
+Two pages is the target, and `make` tells you when you miss it. Before cutting
+content, try `base_pt` in the `[meta]` table — it sets the body size for that
+language alone. French runs about ten percent longer than English for the same
+material, which is why it sits lower here.
 
-`letter` par défaut (Amérique du Nord). Pour l'Europe, change `paper` dans
-la section `[meta]` du fichier de contenu ou lancer `make PAPER=a4`.
+## Publishing
+
+`.github/workflows/pages.yml` builds and deploys on every push to `main`. It
+refuses to deploy if a CV comes out over two pages or an expected file is
+missing, so the length discipline is enforced by CI rather than by memory.
+
+In the repository settings, set Pages → Source to **GitHub Actions**.
+
+`dist/index.html` is a generated landing page: pick a language, read it online
+or download the PDF.
