@@ -369,7 +369,12 @@ b { font-weight: 600; color: var(--ink); }
   .body { margin-left: 0; }
   .skill { grid-template-columns: 1fr; gap: 0; }
   .skill dd { margin-bottom: 2px; }
-  .role-head, .line { flex-wrap: wrap; }
+
+  /* Do NOT wrap these flex rows. Wrapping drops the date onto its own line
+     only for entries whose title is too long, so a short one stays inline and
+     the column reads ragged. Letting the title shrink and wrap inside its own
+     cell keeps every date in the same place. */
+  .line-main, .role-head h4 { min-width: 0; }
 }
 
 /* --- print -------------------------------------------------------------- */
@@ -454,7 +459,7 @@ b { font-weight: 600; color: var(--ink); }
 
   <section class="row skills">
     <div class="rail"><h2 class="long">Compétences</h2></div>
-    <div class="body"><dl class="skill-grid"><div class="skill"><dt>Cloud</dt><dd>AWS (EKS, EC2, VPC, IAM/IRSA, CloudFront, S3, EFS) · GCP</dd></div><div class="skill"><dt>Conteneurs</dt><dd>Kubernetes · Helm · ArgoCD · Cilium</dd></div><div class="skill"><dt>Infra as code</dt><dd>Terraform · Chef · Puppet</dd></div><div class="skill"><dt>Observabilité</dt><dd>Fluent Bit · Splunk · Prometheus · Datadog</dd></div><div class="skill"><dt>Sécurité</dt><dd>IAM et SSO · moindre privilège · RBAC Kubernetes et ArgoCD · NetworkPolicies · Falco · correctifs de CVE</dd></div><div class="skill"><dt>Fiabilité</dt><dd>garde 24/7 · réponse aux incidents · conception des alertes · plan de relève · capacité et coûts · post-mortems</dd></div><div class="skill"><dt>Code et systèmes</dt><dd>Python · Bash · SQL · Linux (Debian, Ubuntu, Arch) · nginx · VMware · Active Directory</dd></div></dl></div>
+    <div class="body"><dl class="skill-grid"><div class="skill"><dt>Cloud</dt><dd>AWS (EKS, EC2, VPC, IAM/IRSA, CloudFront, S3, EFS) · GCP</dd></div><div class="skill"><dt>Conteneurs</dt><dd>Kubernetes · Helm · ArgoCD · Cilium</dd></div><div class="skill"><dt>Infra as code</dt><dd>Terraform · Chef</dd></div><div class="skill"><dt>Observabilité</dt><dd>Fluent Bit · Splunk · Prometheus · Datadog</dd></div><div class="skill"><dt>Sécurité</dt><dd>IAM et SSO · moindre privilège · RBAC Kubernetes et ArgoCD · NetworkPolicies · Falco · correctifs de CVE</dd></div><div class="skill"><dt>Fiabilité</dt><dd>garde 24/7 · réponse aux incidents · conception des alertes · plan de relève · capacité et coûts · post-mortems</dd></div><div class="skill"><dt>Code et systèmes</dt><dd>Python · Bash · SQL · Linux (Debian, Ubuntu, Arch) · nginx · VMware · Active Directory</dd></div></dl></div>
   </section>
 
   <section class="row certifications">
