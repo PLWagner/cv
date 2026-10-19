@@ -2,9 +2,11 @@
 __pycache__/
 *.pyc
 
-/notes
-
-/archive
+# Private material, kept in a separate repository
 notes/
 archive/
 scripts/
+
+# Claude Code per-machine settings. A shared .claude/settings.json may be
+# committed; this one holds whatever each person approved locally.
+.claude/settings.local.json
