@@ -110,7 +110,7 @@ bullets = [
   "Introduire **ArgoCD** et le GitOps pour les services de plateforme.",
   "Prendre **Prometheus** en charge puis contribuer au passage vers Datadog.",
   "Remplacer **Fluentd** par **Fluent Bit** pour l'envoi des journaux vers **Splunk**: étudier l'outil, le présenter à l'équipe et mener le remplacement.",
-  "Assurer la première ligne de la garde 24/7 dès les débuts de Kubernetes.",
+  "Assurer la garde 24/7 dès les débuts de Kubernetes, dont son premier incident sérieux en production.",
   "Découper le code **Terraform** en modules par contexte.",
   "Limiter la portée d'une compromission: NetworkPolicies, security groups, RBAC avec moindre privilège par service dans Kubernetes et ArgoCD, correctifs pour les CVE publiées.",
   "Migrer le CDN de Cloudflare vers **CloudFront**: économie récurrente importante.",

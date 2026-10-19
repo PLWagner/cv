@@ -110,7 +110,7 @@ bullets = [
   "Brought in **ArgoCD** and GitOps for the platform services.",
   "Took care of **Prometheus**, then helped move to Datadog.",
   "Replaced **Fluentd** with **Fluent Bit** for log shipping to **Splunk**: researched the tool, presented it to the team, and led the replacement.",
-  "Was first on call on the 24/7 rotation from the early Kubernetes days.",
+  "On the 24/7 rotation from the early Kubernetes days, through its first serious production incident.",
   "Split the **Terraform** code into modules by context.",
   "Cut the platform's blast radius: NetworkPolicies, security groups, least-privilege **RBAC** per service in Kubernetes and ArgoCD, and patching for published CVEs.",
   "Migrated the CDN from Cloudflare to **CloudFront**: a large recurring saving.",
